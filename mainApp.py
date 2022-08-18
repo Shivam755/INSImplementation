@@ -12,7 +12,11 @@ def getVigenereKey(key:str, plainLen:int) -> str:
     return newKey
 
 def getCeasarKey(key:str) -> str:
-    pass
+    cipher = ""
+    for index in range(len(key)):
+        cipher += chr((ord(key[index])+index) % 95)
+ 
+    return cipher
 
 def getHillKey(key:str) -> str:
     pass
