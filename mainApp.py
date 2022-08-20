@@ -1,3 +1,5 @@
+from hillcipher import Hill
+
 def getVigenereKey(key:str, plainLen:int) -> str:
     keyLen = len(key)
     newKey=""
@@ -19,7 +21,7 @@ def getCeasarKey(key:str) -> str:
     return cipher
 
 def getHillKey(key:str) -> str:
-    pass
+    return Hill.hill_cipher(plain_text=key)
 
 def VignereCipherEncrypt(plaintext:str, key:str)->str:
     new=""
@@ -27,7 +29,7 @@ def VignereCipherEncrypt(plaintext:str, key:str)->str:
     for i in plaintext:
         if len(key)==j:
             j=0
-        new+=chr(ord(i)+key[j])
+        new+=chr(ord(i)+ord(key[j]))
         j+=1
     return new
 
@@ -37,7 +39,7 @@ def VigenereCipherDecrypt(text:str, key:str)->str:
     for i in text:
         if len(key)==j:
             j=0
-        old+=chr(ord(i)-key[j])
+        old+=chr(ord(i)-ord(key[j]))
         j+=1
     return old
 
@@ -57,9 +59,8 @@ def main():
     ceasarKey = getCeasarKey(newKey)
     # Running ceasarKey through Hill's Cipher
     actualKey = getHillKey(ceasarKey)
-
     # Now we have got the actual key and we will run this along with the plain text through Vigenere Cipher 
-    cipherText = VignereCipherEncrypt(actualKey)
+    cipherText = VignereCipherEncrypt(plaintext,actualKey)
     print("The Cipher Text is : ", cipherText)
 
     # Decrypting the Cipher Text for confirmation using the actual key
